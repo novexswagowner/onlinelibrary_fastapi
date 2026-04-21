@@ -428,12 +428,12 @@ def rate_book(
         raise HTTPException(status_code=404, detail="Book not found")
 
     rating = db.scalar(
-        select(Rating).where(Rating.user_id == current_user.id, Rating.book_id == book_id)
+        select(Book_Rating).where(Book_Rating.user_id == current_user.id, Book_Rating.book_id == book_id)
     )
     if rating:
         rating.score = payload.score
     else:
-        rating = Rating(user_id=current_user.id, book_id=book_id, score=payload.score)
+        rating = Book_Rating(user_id=current_user.id, book_id=book_id, score=payload.score)
         db.add(rating)
 
     recalculate_average_rating(db, book_id)
@@ -494,7 +494,7 @@ def get_stats(
         users_count=db.scalar(select(func.count()).select_from(User)) or 0,
         books_count=db.scalar(select(func.count()).select_from(Book)) or 0,
         messages_count=db.scalar(select(func.count()).select_from(Message)) or 0,
-        ratings_count=db.scalar(select(func.count()).select_from(Rating)) or 0,
+        ratings_count=db.scalar(select(func.count()).select_from(Book_Rating)) or 0,
     )
 
 
