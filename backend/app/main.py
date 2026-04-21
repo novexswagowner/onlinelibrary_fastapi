@@ -26,9 +26,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-FRONTEND_INDEX = Path(__file__).resolve().parent.parent / "frontend" / "pages" / "index.html"
-FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
-app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR), name="frontend")
+# FRONTEND_INDEX = Path(__file__).resolve().parent.parent / "frontend" / "pages" / "index.html"
+# FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+# app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR), name="frontend")
 MAX_BOOK_FILE_SIZE = 100 * 1024 * 1024
 MultiPartParser.max_file_size = MAX_BOOK_FILE_SIZE
 MultiPartParser.max_part_size = MAX_BOOK_FILE_SIZE
@@ -146,9 +146,9 @@ def on_startup():
         ensure_seed_data(db)
 
 
-@app.get("/")
-def frontend_root():
-    return FileResponse(FRONTEND_INDEX)
+# @app.get("/")
+# def frontend_root():
+#     return FileResponse(FRONTEND_INDEX)
 
 
 @app.api_route("/api/v1/{path:path}", methods=["GET", "POST", "PUT", "PATCH", "DELETE"])

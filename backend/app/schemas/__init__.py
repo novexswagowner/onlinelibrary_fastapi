@@ -1,6 +1,6 @@
-from book import BookCreate, BookDetail, BookPublic, BookUpdate, PagedBooks, RatingCreate
-from message import ChatMessageCreate, ChatMessagePublic
-from user import Token, UserCreate, UserPublic, LoginRequest, RoleUpdate, UserStatusUpdate, AdminStats
+from .book import BookCreate, BookDetail, BookPublic, BookUpdate, PagedBooks, RatingCreate
+from .message import ChatMessageCreate, ChatMessagePublic
+from .user import Token, UserCreate, UserPublic, LoginRequest, RoleUpdate, UserStatusUpdate, AdminStats
 
 __all__ = [
 "BookCreate", 
