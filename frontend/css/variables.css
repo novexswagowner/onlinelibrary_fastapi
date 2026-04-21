@@ -1,0 +1,23 @@
+:root {
+  --bg: #f4f0e6;
+  --bg-elevated: #fffdf8;
+  --ink: #1c1b18;
+  --muted: #5c574c;
+  --accent: #2f5d50;
+  --accent-hover: #24463d;
+  --accent-soft: rgba(47, 93, 80, 0.12);
+  --border: #d9d0c2;
+  --danger: #8b2f2f;
+  --shadow: 0 12px 40px rgba(28, 27, 24, 0.08);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-serif: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --header-h: 64px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

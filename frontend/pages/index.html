@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var path = location.pathname || "";
+        var j = path.indexOf("/frontend/");
+        var front = j >= 0 ? path.slice(0, j + "/frontend".length) : "/frontend";
+        var b = document.createElement("base");
+        b.href = front + "/pages/";
+        document.head.appendChild(b);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Онлайн-библиотека</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">📚</span>
+          <span>
+            <span class="brand-text">Онлайн-библиотека</span>
+            <span class="brand-tag">чтение рядом</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a href="index.html" class="is-active">Главная</a>
+          <a href="books.html">Каталог</a>
+          <a href="login.html" data-nav-guest>Вход</a>
+          <a href="register.html" data-nav-guest>Регистрация</a>
+          <a href="profile.html" data-nav-auth hidden>Профиль</a>
+          <button type="button" class="btn btn-ghost" data-nav-auth hidden data-logout>
+            Выйти
+          </button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-card">
+            <h1>Книги, рейтинги и общий чат</h1>
+            <p class="lead">
+              Запускайте сервер из каталога <code>backend</code> (например, <code>python run.py</code>).
+              Главная страница открывается по адресу <code>/</code>, статика фронтенда — под префиксом
+              <code>/frontend/</code>, API — <code>/api/…</code>.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="books.html">Открыть каталог</a>
+              <a class="btn btn-ghost" href="register.html">Создать аккаунт</a>
+            </div>
+          </div>
+          <aside class="hero-aside" aria-label="Как пользоваться">
+            <h2>Быстрый старт</h2>
+            <ol class="hero-list">
+              <li>Зарегистрируйтесь и войдите.</li>
+              <li>Выберите книгу в каталоге.</li>
+              <li>Читайте онлайн; чат — компактная панель справа внизу (кроме страницы регистрации).</li>
+            </ol>
+            <p class="muted small" style="margin-bottom: 0">
+              По умолчанию API вызывается на том же хосте и порту, что и страница (удобно при заходе по
+              LAN-IP). Другой URL API задайте в <code>window.LIBRARY_API_BASE</code> до
+              <code>config.js</code>.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="container">Онлайн-библиотека · HTML/CSS/JS</div>
+    </footer>
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/chat.js"></script>
+    <script src="../js/layout.js"></script>
+  </body>
+</html>

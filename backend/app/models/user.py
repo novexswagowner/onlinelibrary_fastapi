@@ -21,5 +21,5 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, nullable=False)
 
     
-    ratings = relationship("Rating", back_populates="user", cascade="all, delete-orphan")
+    ratings = relationship("Book_Rating", back_populates="user", cascade="all, delete-orphan")
     messages = relationship("Message", back_populates="sender", cascade="all, delete-orphan")

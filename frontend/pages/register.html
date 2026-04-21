@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var path = location.pathname || "";
+        var j = path.indexOf("/frontend/");
+        var front = j >= 0 ? path.slice(0, j + "/frontend".length) : "/frontend";
+        var b = document.createElement("base");
+        b.href = front + "/pages/";
+        document.head.appendChild(b);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация — Онлайн-библиотека</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">📚</span>
+          <span>
+            <span class="brand-text">Онлайн-библиотека</span>
+            <span class="brand-tag">регистрация</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="books.html">Каталог</a>
+          <a href="login.html" data-nav-guest>Вход</a>
+          <a href="register.html" data-nav-guest>Регистрация</a>
+          <a href="profile.html" data-nav-auth hidden>Профиль</a>
+          <button type="button" class="btn btn-ghost" data-nav-auth hidden data-logout>
+            Выйти
+          </button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container auth-layout">
+        <h1>Новый читатель</h1>
+        <div class="auth-tabs" role="tablist" aria-label="Аккаунт">
+          <a class="auth-tab" href="login.html">Вход</a>
+          <a class="auth-tab is-active" href="register.html">Регистрация</a>
+        </div>
+        <form id="register-form" class="card form-grid">
+          <div>
+            <label for="reg-email">Email</label>
+            <input id="reg-email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div>
+            <label for="reg-name">Имя и фамилия</label>
+            <input
+              id="reg-name"
+              name="full_name"
+              type="text"
+              autocomplete="name"
+              required
+              minlength="2"
+              maxlength="120"
+            />
+          </div>
+          <div>
+            <label for="reg-password">Пароль</label>
+            <input
+              id="reg-password"
+              name="password"
+              type="password"
+              autocomplete="new-password"
+              required
+              minlength="6"
+              maxlength="128"
+            />
+          </div>
+          <p id="register-error" class="form-error"></p>
+          <button type="submit" class="btn btn-primary">Создать аккаунт</button>
+        </form>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">Онлайн-библиотека</div>
+    </footer>
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/layout.js"></script>
+    <script src="../js/register.js"></script>
+  </body>
+</html>

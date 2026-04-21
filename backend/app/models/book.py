@@ -26,7 +26,7 @@ class Book(Base):
         nullable=False,
     )
 
-    ratings = relationship("Rating", back_populates="book", cascade="all, delete-orphan")
+    ratings = relationship("Book_Rating", back_populates="book", cascade="all, delete-orphan")
 
 
 class Book_Rating(Base):
