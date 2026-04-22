@@ -65,7 +65,14 @@ python run.py
 
 ## Структура
 
-- `backend/` — приложение (`app/main.py`, модели, схемы, авторизация)
-- `frontend/` — HTML/CSS/JS, монтируется по пути `/frontend`
-- `requirements.txt` — зависимости Python для всего проекта
+- `backend/`
+  - `/app/` - приложение
+    - `/models` - модели
+    - `/schemas` - схемы
+    - `auth.py` - авторизация
+    - `config.py` - конфигурация
+    - `database.py` - база данных
+    - `main.py` - основной файл (все эндпоинты)
+  - `run.py` - файл запуска 
+- `frontend/` — HTML/CSS/JS
 
