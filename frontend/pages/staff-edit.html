@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var path = location.pathname || "";
+        var j = path.indexOf("/frontend/");
+        var front = j >= 0 ? path.slice(0, j + "/frontend".length) : "/frontend";
+        var b = document.createElement("base");
+        b.href = front + "/pages/";
+        document.head.appendChild(b);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Редактирование книги — Онлайн-библиотека</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">📚</span>
+          <span>
+            <span class="brand-text">Онлайн-библиотека</span>
+            <span class="brand-tag">редактор</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="books.html">Каталог</a>
+          <a href="staff.html" data-nav-staff hidden>Библиотекарь</a>
+          <a href="admin.html" data-nav-admin hidden>Админка</a>
+          <a href="login.html" data-nav-guest>Вход</a>
+          <a href="register.html" data-nav-guest>Регистрация</a>
+          <a href="profile.html" data-nav-auth hidden>Профиль</a>
+          <button type="button" class="btn btn-ghost" data-nav-auth hidden data-logout>Выйти</button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container narrow-form">
+        <p class="muted"><a href="staff.html">← Кабинет библиотекаря</a> · <a id="staff-link-public" href="books.html">Каталог</a></p>
+        <h1 id="staff-edit-title">Редактирование книги</h1>
+        <p id="staff-edit-error" class="form-error"></p>
+        <p id="staff-edit-msg" class="muted small"></p>
+        <form id="staff-edit-form" class="card form-grid wide-form">
+          <div>
+            <label for="se-title">Название</label>
+            <input id="se-title" type="text" required maxlength="255" />
+          </div>
+          <div>
+            <label for="se-author">Автор</label>
+            <input id="se-author" type="text" required maxlength="180" />
+          </div>
+          <div>
+            <label for="se-desc">Описание (≥ 10 симв. при сохранении полного набора)</label>
+            <textarea id="se-desc" required minlength="10" maxlength="4000"></textarea>
+          </div>
+          <div>
+            <label for="se-content">Текст книги (≥ 10 симв.)</label>
+            <textarea id="se-content" required minlength="10"></textarea>
+          </div>
+          <div>
+            <label for="se-url">file_url</label>
+            <input id="se-url" type="text" maxlength="500" placeholder="пусто = null" />
+          </div>
+          <div class="form-actions-row">
+            <button type="submit" class="btn btn-primary">Сохранить (PUT)</button>
+            <button type="button" class="btn btn-ghost" id="staff-delete-btn">Удалить книгу</button>
+          </div>
+        </form>
+        <section class="card section-block">
+          <h2>Заменить файл книги</h2>
+          <p class="muted small">PUT <code>/api/books/{id}/upload</code> — новый <code>file</code> обязателен.</p>
+          <form id="staff-replace-file-form" class="form-grid wide-form" enctype="multipart/form-data">
+            <div>
+              <label for="sr-file">Новый файл</label>
+              <input id="sr-file" name="file" type="file" required />
+            </div>
+            <div>
+              <label for="sr-content">Текст (необязательно)</label>
+              <textarea id="sr-content" name="content" placeholder="Переопределить текст"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Заменить файл</button>
+          </form>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">Онлайн-библиотека</div>
+    </footer>
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/chat.js"></script>
+    <script src="../js/layout.js"></script>
+    <script src="../js/staff-edit.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var p = new URLSearchParams(location.search);
+        var id = p.get("id");
+        if (id) {
+          var a = document.getElementById("staff-link-public");
+          if (a) a.href = "book.html?id=" + encodeURIComponent(id);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var path = location.pathname || "";
+        var j = path.indexOf("/frontend/");
+        var front = j >= 0 ? path.slice(0, j + "/frontend".length) : "/frontend";
+        var b = document.createElement("base");
+        b.href = front + "/pages/";
+        document.head.appendChild(b);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Библиотекарь — Онлайн-библиотека</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">📚</span>
+          <span>
+            <span class="brand-text">Онлайн-библиотека</span>
+            <span class="brand-tag">кабинет</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="books.html">Каталог</a>
+          <a href="staff.html" class="is-active" data-nav-staff hidden>Библиотекарь</a>
+          <a href="admin.html" data-nav-admin hidden>Админка</a>
+          <a href="login.html" data-nav-guest>Вход</a>
+          <a href="register.html" data-nav-guest>Регистрация</a>
+          <a href="profile.html" data-nav-auth hidden>Профиль</a>
+          <button type="button" class="btn btn-ghost" data-nav-auth hidden data-logout>Выйти</button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <h1>Кабинет библиотекаря</h1>
+        <p class="muted">Доступно ролям <code>librarian</code> и <code>admin</code>.</p>
+        <div class="staff-cards">
+          <a class="card staff-card-link" href="staff-new.html">
+            <h2>Новая книга (JSON)</h2>
+            <p class="muted">POST <code>/api/books</code> — поля текста по схеме API.</p>
+          </a>
+          <a class="card staff-card-link" href="staff-upload.html">
+            <h2>Загрузить книгу (PDF)</h2>
+            <p class="muted">POST <code>/api/books/upload</code> — только <strong>PDF</strong>, файл обязателен.</p>
+          </a>
+        </div>
+        <section class="card section-block">
+          <h2>Редактировать по ID</h2>
+          <form class="inline-form" id="staff-goto-edit">
+            <label for="staff-edit-id">ID книги</label>
+            <input id="staff-edit-id" type="number" min="1" step="1" required />
+            <button type="submit" class="btn btn-primary">Открыть</button>
+          </form>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">Онлайн-библиотека</div>
+    </footer>
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/chat.js"></script>
+    <script src="../js/layout.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var f = document.getElementById("staff-goto-edit");
+        if (!f) return;
+        f.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var id = document.getElementById("staff-edit-id").value;
+          if (id) location.href = "staff-edit.html?id=" + encodeURIComponent(id);
+        });
+      });
+    </script>
+  </body>
+</html>

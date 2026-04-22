@@ -31,6 +31,18 @@
       return;
     }
 
+    let staffLink = "";
+    if (window.LibraryAuth.isLoggedIn()) {
+      try {
+        const me = await window.LibraryAPI.apiFetch("/api/users/me");
+        if (me.role === "admin" || me.role === "librarian") {
+          staffLink = `<a class="btn btn-ghost" href="${pb}/staff-edit.html?id=${id}">Редактировать</a>`;
+        }
+      } catch {
+        staffLink = "";
+      }
+    }
+
     try {
       const b = await window.LibraryAPI.apiFetch(`/api/books/${id}`);
       document.title = `${b.title} — Онлайн-библиотека`;
@@ -41,6 +53,7 @@
           <p class="book-desc">${escapeHtml(b.description)}</p>
           <div class="book-actions">
             <a class="btn btn-primary" href="${pb}/read.html?id=${id}">Читать онлайн</a>
+            ${staffLink}
             ${
               b.has_file
                 ? `<a class="btn btn-ghost" href="${escapeHtml(

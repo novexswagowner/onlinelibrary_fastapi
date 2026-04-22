@@ -9,6 +9,22 @@
     return (window.LIBRARY_PAGES || "/frontend/pages").replace(/\/$/, "");
   }
 
+  function fileInlineUrl(bookId) {
+    const path = `/api/books/${bookId}/file`;
+    if (window.LibraryAPI && typeof window.LibraryAPI.apiUrl === "function") {
+      return window.LibraryAPI.apiUrl(path);
+    }
+    const prefix = (window.LIBRARY_API_BASE ?? "").replace(/\/$/, "");
+    return prefix ? `${prefix}${path}` : path;
+  }
+
+  function isPdfBook(b) {
+    if (!b || !b.has_file) return false;
+    const mime = String(b.file_mime || "").toLowerCase();
+    const name = String(b.file_name || "").toLowerCase();
+    return mime.includes("pdf") || name.endsWith(".pdf");
+  }
+
   function getId() {
     const p = new URLSearchParams(window.location.search);
     const id = Number(p.get("id"));
@@ -30,6 +46,27 @@
     }
 
     try {
+      const meta = await window.LibraryAPI.apiFetch(`/api/books/${id}`);
+      document.title = `Чтение: ${meta.title}`;
+
+      if (isPdfBook(meta)) {
+        const src = fileInlineUrl(id);
+        root.innerHTML = `
+        <header class="read-head">
+          <a class="link-back" href="${pb}/book.html?id=${id}">← К карточке</a>
+          <h1>${escapeHtml(meta.title)}</h1>
+          <p class="muted">${escapeHtml(meta.author)} · PDF</p>
+        </header>
+        <div class="read-pdf-wrap">
+          <iframe class="read-pdf-frame" title="${escapeHtml(meta.title)}" src="${escapeHtml(src)}"></iframe>
+          <p class="muted small read-pdf-fallback">
+            Если встроенный просмотр не открылся,
+            <a href="${escapeHtml(src)}" target="_blank" rel="noopener">откройте PDF в новой вкладке</a>.
+          </p>
+        </div>`;
+        return;
+      }
+
       const b = await window.LibraryAPI.apiFetch(`/api/books/${id}/content`);
       document.title = `Чтение: ${b.title}`;
       root.innerHTML = `
@@ -44,7 +81,7 @@
       err.textContent =
         e.status === 401 || e.status === 403
           ? "Недостаточно прав для чтения этой книги. Войдите как читатель."
-          : e.message || "Не удалось загрузить текст";
+          : e.message || "Не удалось загрузить книгу";
     }
   });
 })();

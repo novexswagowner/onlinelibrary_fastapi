@@ -52,5 +52,43 @@
     return data;
   }
 
-  window.LibraryAPI = { apiFetch, getToken, apiUrl };
+  /**
+   * @param {string} path
+   * @param {FormData} formData
+   * @param {{ method?: string }} [opts]
+   */
+  async function apiFetchFormData(path, formData, opts) {
+    const url = apiUrl(path);
+    const headers = new Headers();
+    const token = getToken();
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
+    const method = (opts && opts.method) || "POST";
+    const res = await fetch(url, { method, headers, body: formData });
+    const text = await res.text();
+    let data = null;
+    if (text) {
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = text;
+      }
+    }
+    if (!res.ok) {
+      const detail =
+        data && typeof data === "object" && "detail" in data
+          ? data.detail
+          : data || res.statusText;
+      const err = new Error(
+        typeof detail === "string" ? detail : JSON.stringify(detail)
+      );
+      err.status = res.status;
+      err.body = data;
+      throw err;
+    }
+    return data;
+  }
+
+  window.LibraryAPI = { apiFetch, apiFetchFormData, getToken, apiUrl };
 })();

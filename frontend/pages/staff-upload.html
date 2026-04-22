@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var path = location.pathname || "";
+        var j = path.indexOf("/frontend/");
+        var front = j >= 0 ? path.slice(0, j + "/frontend".length) : "/frontend";
+        var b = document.createElement("base");
+        b.href = front + "/pages/";
+        document.head.appendChild(b);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Загрузка книги — Онлайн-библиотека</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">📚</span>
+          <span>
+            <span class="brand-text">Онлайн-библиотека</span>
+            <span class="brand-tag">загрузка</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="books.html">Каталог</a>
+          <a href="staff.html" data-nav-staff hidden>Библиотекарь</a>
+          <a href="admin.html" data-nav-admin hidden>Админка</a>
+          <a href="login.html" data-nav-guest>Вход</a>
+          <a href="register.html" data-nav-guest>Регистрация</a>
+          <a href="profile.html" data-nav-auth hidden>Профиль</a>
+          <button type="button" class="btn btn-ghost" data-nav-auth hidden data-logout>Выйти</button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container narrow-form">
+        <p class="muted"><a href="staff.html">← Кабинет библиотекаря</a></p>
+        <h1>Загрузка книги (multipart)</h1>
+        <p class="banner pdf-upload-note" role="note">
+          Поддерживается <strong>только PDF</strong>: загружайте файл с расширением <code>.pdf</code> и типом
+          <code>application/pdf</code>. Другие форматы в этом интерфейсе не принимаются.
+        </p>
+        <p class="muted small">
+          Поля формы: <code>title</code>, <code>author</code>, <code>description</code> (от 3 символов), опционально
+          <code>content</code>, обязательный <code>file</code> (PDF). Максимум 100 МБ.
+        </p>
+        <p id="staff-up-error" class="form-error"></p>
+        <p id="staff-up-ok" class="muted small"></p>
+        <form id="staff-up-form" class="card form-grid wide-form" enctype="multipart/form-data">
+          <div>
+            <label for="su-title">Название</label>
+            <input id="su-title" name="title" type="text" required maxlength="255" />
+          </div>
+          <div>
+            <label for="su-author">Автор</label>
+            <input id="su-author" name="author" type="text" required maxlength="180" />
+          </div>
+          <div>
+            <label for="su-desc">Описание (≥ 3 симв.)</label>
+            <textarea id="su-desc" name="description" required minlength="3" maxlength="4000"></textarea>
+          </div>
+          <div>
+            <label for="su-content">Текст / подпись (необязательно)</label>
+            <textarea id="su-content" name="content" placeholder="Если пусто — из .txt или заглушка"></textarea>
+          </div>
+          <div>
+            <label for="su-file">Файл книги (PDF)</label>
+            <input
+              id="su-file"
+              name="file"
+              type="file"
+              required
+              accept="application/pdf,.pdf"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Загрузить</button>
+        </form>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">Онлайн-библиотека</div>
+    </footer>
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/chat.js"></script>
+    <script src="../js/layout.js"></script>
+    <script src="../js/staff-upload.js"></script>
+  </body>
+</html>

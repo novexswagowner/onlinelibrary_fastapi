@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        var path = location.pathname || "";
+        var j = path.indexOf("/frontend/");
+        var front = j >= 0 ? path.slice(0, j + "/frontend".length) : "/frontend";
+        var b = document.createElement("base");
+        b.href = front + "/pages/";
+        document.head.appendChild(b);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Новая книга — Онлайн-библиотека</title>
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <a class="brand" href="index.html">
+          <span class="brand-mark" aria-hidden="true">📚</span>
+          <span>
+            <span class="brand-text">Онлайн-библиотека</span>
+            <span class="brand-tag">создание</span>
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a href="index.html">Главная</a>
+          <a href="books.html">Каталог</a>
+          <a href="staff.html" data-nav-staff hidden>Библиотекарь</a>
+          <a href="admin.html" data-nav-admin hidden>Админка</a>
+          <a href="login.html" data-nav-guest>Вход</a>
+          <a href="register.html" data-nav-guest>Регистрация</a>
+          <a href="profile.html" data-nav-auth hidden>Профиль</a>
+          <button type="button" class="btn btn-ghost" data-nav-auth hidden data-logout>Выйти</button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="container narrow-form">
+        <p class="muted"><a href="staff.html">← Кабинет библиотекаря</a></p>
+        <h1>Новая книга (JSON)</h1>
+        <p class="muted small">
+          Описание и текст книги — не короче 10 символов (требование API). Опционально: внешняя ссылка
+          <code>file_url</code>.
+        </p>
+        <p id="staff-new-error" class="form-error"></p>
+        <p id="staff-new-ok" class="muted small"></p>
+        <form id="staff-new-form" class="card form-grid wide-form">
+          <div>
+            <label for="sn-title">Название</label>
+            <input id="sn-title" name="title" type="text" required maxlength="255" />
+          </div>
+          <div>
+            <label for="sn-author">Автор</label>
+            <input id="sn-author" name="author" type="text" required maxlength="180" />
+          </div>
+          <div>
+            <label for="sn-desc">Описание (≥ 10 симв.)</label>
+            <textarea id="sn-desc" name="description" required minlength="10" maxlength="4000"></textarea>
+          </div>
+          <div>
+            <label for="sn-content">Текст книги (≥ 10 симв.)</label>
+            <textarea id="sn-content" name="content" required minlength="10"></textarea>
+          </div>
+          <div>
+            <label for="sn-url">file_url (необязательно)</label>
+            <input id="sn-url" name="file_url" type="text" maxlength="500" placeholder="https://…" />
+          </div>
+          <button type="submit" class="btn btn-primary">Создать</button>
+        </form>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">Онлайн-библиотека</div>
+    </footer>
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/chat.js"></script>
+    <script src="../js/layout.js"></script>
+    <script src="../js/staff-new.js"></script>
+  </body>
+</html>
