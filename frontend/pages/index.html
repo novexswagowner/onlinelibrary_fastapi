@@ -46,9 +46,7 @@
           <div class="hero-card">
             <h1>Книги, рейтинги и общий чат</h1>
             <p class="lead">
-              Запускайте сервер из каталога <code>backend</code> (например, <code>python run.py</code>).
-              Главная страница открывается по адресу <code>/</code>, статика фронтенда — под префиксом
-              <code>/frontend/</code>, API — <code>/api/…</code>.
+              Каталог произведений, чтение в браузере, общий чат и личный кабинет — всё в одном месте.
             </p>
             <div class="cta-row">
               <a class="btn btn-primary" href="books.html">Открыть каталог</a>
@@ -63,19 +61,14 @@
               <li>Зарегистрируйтесь и войдите.</li>
               <li>Выберите книгу в каталоге.</li>
               <li>Читайте онлайн; чат — справа внизу (кроме регистрации).</li>
-              <li>Библиотекарь/админ: загрузка и правка книг, админ — статистика и пользователи.</li>
+              <li>Сотрудники библиотеки могут пополнять каталог; администратор ведёт сводку и учётные записи.</li>
             </ol>
-            <p class="muted small" style="margin-bottom: 0">
-              По умолчанию API вызывается на том же хосте и порту, что и страница (удобно при заходе по
-              LAN-IP). Другой URL API задайте в <code>window.LIBRARY_API_BASE</code> до
-              <code>config.js</code>.
-            </p>
           </aside>
         </div>
       </section>
     </main>
     <footer class="site-footer">
-      <div class="container">Онлайн-библиотека · HTML/CSS/JS</div>
+      <div class="container">Онлайн-библиотека</div>
     </footer>
     <script src="../js/config.js"></script>
     <script src="../js/api.js"></script>

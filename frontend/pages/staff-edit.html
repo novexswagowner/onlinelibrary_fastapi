@@ -62,17 +62,17 @@
             <textarea id="se-content" required minlength="10"></textarea>
           </div>
           <div>
-            <label for="se-url">file_url</label>
-            <input id="se-url" type="text" maxlength="500" placeholder="пусто = null" />
+            <label for="se-url">Ссылка на файл в интернете</label>
+            <input id="se-url" type="text" maxlength="500" placeholder="Необязательно" />
           </div>
           <div class="form-actions-row">
-            <button type="submit" class="btn btn-primary">Сохранить (PUT)</button>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
             <button type="button" class="btn btn-ghost" id="staff-delete-btn">Удалить книгу</button>
           </div>
         </form>
         <section class="card section-block">
           <h2>Заменить файл книги</h2>
-          <p class="muted small">PUT <code>/api/books/{id}/upload</code> — новый <code>file</code> обязателен.</p>
+          <p class="muted small">Выберите новый файл книги — он обязателен для замены.</p>
           <form id="staff-replace-file-form" class="form-grid wide-form" enctype="multipart/form-data">
             <div>
               <label for="sr-file">Новый файл</label>

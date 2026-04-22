@@ -41,10 +41,10 @@
     <main>
       <div class="container narrow-form">
         <p class="muted"><a href="staff.html">← Кабинет библиотекаря</a></p>
-        <h1>Новая книга (JSON)</h1>
+        <h1>Новая книга</h1>
         <p class="muted small">
-          Описание и текст книги — не короче 10 символов (требование API). Опционально: внешняя ссылка
-          <code>file_url</code>.
+          Описание и полный текст книги — не короче 10 символов. При необходимости укажите ссылку на файл в
+          интернете.
         </p>
         <p id="staff-new-error" class="form-error"></p>
         <p id="staff-new-ok" class="muted small"></p>
@@ -66,7 +66,7 @@
             <textarea id="sn-content" name="content" required minlength="10"></textarea>
           </div>
           <div>
-            <label for="sn-url">file_url (необязательно)</label>
+            <label for="sn-url">Ссылка на файл в интернете (необязательно)</label>
             <input id="sn-url" name="file_url" type="text" maxlength="500" placeholder="https://…" />
           </div>
           <button type="submit" class="btn btn-primary">Создать</button>

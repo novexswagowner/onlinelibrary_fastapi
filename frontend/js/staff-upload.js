@@ -45,8 +45,9 @@
       }
       const fd = new FormData(form);
       try {
-        const book = await window.LibraryAPI.apiFetchFormData("/api/books/upload", fd, {
+        const book = await window.LibraryAPI.apiFetch("/api/books/upload", {
           method: "POST",
+          body: fd,
         });
         ok.textContent = `Книга загружена, id=${book.id}. Можно открыть в каталоге.`;
         form.reset();

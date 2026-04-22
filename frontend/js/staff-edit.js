@@ -31,7 +31,8 @@
     const err = document.getElementById("staff-edit-error");
     const msg = document.getElementById("staff-edit-msg");
     if (!id) {
-      err.textContent = "Укажите id в query, например staff-edit.html?id=1";
+      err.textContent =
+        "Откройте редактирование из каталога или кабинета библиотекаря и выберите номер книги.";
       return;
     }
 
@@ -106,8 +107,9 @@
       msg.textContent = "";
       const fd = new FormData(replaceForm);
       try {
-        await window.LibraryAPI.apiFetchFormData(`/api/books/${id}/upload`, fd, {
+        await window.LibraryAPI.apiFetch(`/api/books/${id}/upload`, {
           method: "PUT",
+          body: fd,
         });
         msg.textContent = "Файл книги обновлён.";
         replaceForm.reset();
